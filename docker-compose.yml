@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+   node-monocular-camera:
+      container_name: node-monocular-camera
+      build:
+        context: .
+        dockerfile: Dockerfile.camera
+      network_mode: host
+      restart: always
+      devices:
+         - "/dev/vchiq:/dev/vchiq"
+      privileged: true
+      command: ros2 run raspicam2 raspicam2_node --ros-args --params-file `ros2 pkg prefix raspicam2`/share/raspicam2/cfg/params.yaml
