@@ -11,5 +11,9 @@ _It is upposed that the steps of [Getting started guide](https://github.com/Cati
     ```
 3. Build and run dockerized nodes
     ```
-    $ docker-compose up
+    $ docker-compose up -d
+    ```
+4. Stop the nodes
+    ```
+    $ docker-compose down
     ```
