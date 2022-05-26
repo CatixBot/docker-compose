@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+   node-monocular-camera:
+      container_name: node-monocular-camera
+      build:
+        context: .
+        dockerfile: Dockerfile.camera
+      network_mode: host
+      restart: always
+      devices:
+         - "/dev/vchiq:/dev/vchiq"
+      privileged: true
+      command: ros2 run raspicam2 raspicam2_node --ros-args --params-file /root/workspace/install/raspicam2/share/raspicam2/cfg/calibration.yml
+   camera-calibration-app:
+      container_name: camera-calibration-app
+      build:
+         context: .
+         dockerfile: Dockerfile.calibration-camera
+      depends_on:
+         - node-monocular-camera
+      network_mode: host
+      environment:
+         - DISPLAY=$DISPLAY
+      volumes:
+         - /tmp/.X11-unix:/tmp/.X11-unix
+         - ~/.Xauthority:/root/.Xauthority
+      restart: always
+      command: ros2 run camera_calibration cameracalibrator --size 8x6 --square 0.025 image:=/camera/image camera:=/camera

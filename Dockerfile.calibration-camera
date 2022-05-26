@@ -1,0 +1,22 @@
+FROM ros:foxy-ros-base
+
+SHELL ["/bin/bash", "-c"]
+
+RUN apt update && \
+    apt install -y git python3-pip software-properties-common && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN python3 -m pip install opencv-python
+
+RUN mkdir -p ~/workspace/src && \
+    cd ~/workspace/src && \
+    git clone https://github.com/ros-perception/image_pipeline.git --branch ros2
+
+WORKDIR /root/workspace
+
+RUN source /opt/ros/foxy/setup.bash && \
+    MAKEFLAGS=-j1 colcon build --packages-up-to camera_calibration --parallel-workers=1 --event-handlers console_direct+
+
+COPY ros_entrypoint.sh .
+
+ENTRYPOINT ["./ros_entrypoint.sh"]

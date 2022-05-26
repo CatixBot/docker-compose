@@ -10,4 +10,4 @@ services:
       devices:
          - "/dev/vchiq:/dev/vchiq"
       privileged: true
-      command: ros2 run raspicam2 raspicam2_node --ros-args --params-file /root/workspace/install/raspicam2/share/raspicam2/cfg/params.yaml
+      command: ros2 run raspicam2 raspicam2_node --ros-args --params-file /root/workspace/install/raspicam2/share/raspicam2/cfg/default.yml

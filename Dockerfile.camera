@@ -16,7 +16,7 @@ RUN mkdir -p ~/workspace/src && \
 WORKDIR /root/workspace
 
 RUN source /opt/ros/foxy/setup.bash && \
-    MAKEFLAGS=-j1 colcon build --parallel-workers=3 --event-handlers console_direct+
+    MAKEFLAGS=-j1 colcon build --parallel-workers=1 --event-handlers console_direct+
 
 COPY ros_entrypoint.sh .
 
