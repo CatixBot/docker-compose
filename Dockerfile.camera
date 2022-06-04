@@ -11,7 +11,7 @@ RUN add-apt-repository -y ppa:ubuntu-pi-flavour-makers/ppa && \
 
 RUN mkdir -p ~/workspace/src && \
     cd ~/workspace/src && \
-    git clone https://github.com/CatixBot/node-monocular-camera.git
+    git clone https://github.com/CatixBot/node-monocular-camera.git --depth 1
 
 WORKDIR /root/workspace
 

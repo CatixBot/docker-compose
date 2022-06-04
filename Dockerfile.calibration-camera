@@ -10,7 +10,7 @@ RUN python3 -m pip install opencv-python
 
 RUN mkdir -p ~/workspace/src && \
     cd ~/workspace/src && \
-    git clone https://github.com/ros-perception/image_pipeline.git --branch ros2
+    git clone https://github.com/ros-perception/image_pipeline.git --branch 3.0.0 --depth 1
 
 WORKDIR /root/workspace
 
