@@ -6,6 +6,7 @@ services:
         context: .
         dockerfile: Dockerfile.camera
       network_mode: host
+      ipc: host
       restart: always
       devices:
          - "/dev/vchiq:/dev/vchiq"
@@ -19,10 +20,11 @@ services:
       depends_on:
          - node-monocular-camera
       network_mode: host
+      ipc: host
       environment:
          - DISPLAY=$DISPLAY
       volumes:
-         - /tmp/.X11-unix:/tmp/.X11-unix
+         - /tmp/.X11-unix:/tmp/.X11-unix:rw
          - ~/.Xauthority:/root/.Xauthority
       restart: always
       command: ros2 run camera_calibration cameracalibrator --size 8x6 --square 0.025 image:=/camera/image camera:=/camera
